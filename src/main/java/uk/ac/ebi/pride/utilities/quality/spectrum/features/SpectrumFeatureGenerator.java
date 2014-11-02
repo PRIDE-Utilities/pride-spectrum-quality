@@ -78,7 +78,7 @@ public class SpectrumFeatureGenerator{
                         new NonNoisePeaks3(5, 50, Constants.maxPeaksPer1000Da)  //optimized for NeutralLosses (Selectors[2])
         };
 
-        features = new HashMap<Integer, Map<SpectrumFeatureType, Object>>();
+
     }
 
     /**
@@ -105,6 +105,8 @@ public class SpectrumFeatureGenerator{
         // [FR] Calculates features for standard peak list subsets
         
         Spectrum analysedSpectrum;
+
+        features = new HashMap<Integer, Map<SpectrumFeatureType, Object>>();
         
         int n = 0;
         GeneralFeatures generalFeatures = GeneralFeatures.getInstance();

@@ -8,6 +8,7 @@ import uk.ac.ebi.pride.utilities.data.core.Spectrum;
 import uk.ac.ebi.pride.utilities.quality.utils.SpectrumFeatureType;
 
 import java.io.File;
+import java.io.PrintStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,6 +25,10 @@ public class SpectrumFeatureGeneratorTest {
 
     MzIdentMLControllerImpl mzIdentMLController;
 
+    PrintStream outFile = null;
+
+
+
     @org.junit.Before
     public void setUp() throws Exception {
         URL url = SpectrumFeatureGeneratorTest.class.getClassLoader().getResource("small.mzid");
@@ -38,6 +43,7 @@ public class SpectrumFeatureGeneratorTest {
         List<File> fileList = new ArrayList<File>();
         fileList.add(filems);
         mzIdentMLController.addMSController(fileList);
+        outFile = new PrintStream(new File("variables.txt"));
     }
 
     @org.junit.After
@@ -58,15 +64,25 @@ public class SpectrumFeatureGeneratorTest {
     @org.junit.Test
     public void testComputeFeatureForSpectrum() throws Exception {
         generator = SpectrumFeatureGenerator.getInstance();
+        int count = 0;
         for(Comparable id: mzIdentMLController.getSpectrumIds()){
             Spectrum spectrum = mzIdentMLController.getSpectrumById(id);
             if(DataAccessUtilities.getMsLevel(spectrum) > 1 && spectrum.getPrecursors() != null){
-                System.out.print("\nid:\t" + id);
-                Collection<Map<SpectrumFeatureType, Object>> features = generator.computeFeatureForSpectrum(spectrum, DataAccessUtilities.getPrecursorCharge(spectrum.getPrecursors())).values();
-                for(Map<SpectrumFeatureType, Object> featuresValues: features)
+                Map<Integer, Map<SpectrumFeatureType, Object>> features = generator.computeFeatureForSpectrum(spectrum, DataAccessUtilities.getPrecursorCharge(spectrum.getPrecursors()));
+                if(count == 0){
+                    outFile.print("id\tidentified\t");
+                    for(Integer featuresValues: features.keySet())
+                        for(SpectrumFeatureType spectrumFeatureType: features.get(featuresValues).keySet())
+                            outFile.print(spectrumFeatureType + "["+ featuresValues+ "]" +"\t");
+                }
+                outFile.println();
+                outFile.print(id + "\t" + mzIdentMLController.isIdentifiedSpectrum(id) + "\t");
+                Collection<Map<SpectrumFeatureType, Object>> featuresCollection = features.values();
+                for(Map<SpectrumFeatureType, Object> featuresValues: featuresCollection)
                     for(SpectrumFeatureType spectrumFeatureType: featuresValues.keySet())
-                        System.out.print("\tfeature:\t" + spectrumFeatureType.getCode() + "\t:\t" + featuresValues.get(spectrumFeatureType));
+                        outFile.print(featuresValues.get(spectrumFeatureType) + "\t");
             }
+            count++;
         }
 
     }
