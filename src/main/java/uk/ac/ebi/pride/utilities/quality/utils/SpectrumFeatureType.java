@@ -7,7 +7,7 @@ import uk.ac.ebi.pride.utilities.data.core.Spectrum;
  */
 public enum SpectrumFeatureType {
 
-    XXArea(),
+    XXArea("XXArea", "compute the XArea of an Spectrum","compute the XArea of an Spectrum", Double.class),
     QUALSCORE_AA_MASS_DIFF                   ("QS-AAMAS-DIF",    "AA mass differences, number of", "Plain number of peak-distances that could be amino acids (normalized by dividing this number by the square of the total number of peaks)",Double.class),
     QUALSCORE_AA_MASS_ABUNDANCE_WEIGHTED     ("QS-AAMAS-AWT",    "AA mass differences, abundance-weighted",  "Feature 4 is roughly equivalent to feature 1 (number of AA distances) but it is an abundance-weighted version (FR)", Double.class),
     QUALSCORE_AA_MASS_TAG_AVG_LONGER         ("QS-AAMAS-TAGAVG", "Sequence tag, average longest",      "(Average) Based on chains of consecutive amino-acid-like distances: for every peak <I>i</I> this <sub>i</sub> will represent the maximum number of steps of amino-acid distance can be taken towards lower m/z values",Double.class),
