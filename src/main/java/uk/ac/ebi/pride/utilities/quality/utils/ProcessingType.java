@@ -8,14 +8,14 @@ import uk.ac.ebi.pride.utilities.quality.spectrum.peakselectors.*;
  */
 public enum ProcessingType {
 
-    ALL_PEAKS         ("ALLPEAK",        "Include all the peaks in the analysis", AllPeaks.class),
-    DOM_PEAKS         ("DOMPEAK",        "Dominant peaks: bigger than 20% of the average of the 5 biggest peaks", DominantPeaks.class),
-    DOM_DA_PEAKS      ("DOMDAPEAK",      "Dominant peaks: bigger than 20% of the average of the 5 biggest peaks", DominantPeaksPerDalton.class),
-    ISO_PEAKS         ("ISOPEAK",        "Isotope signal, peaks which fit a mass-dependent isotope pattern predicted by a Poisson model", IsotopePeaks.class),
-    NOISE_PEAKS       ("NOISEPEAK",      "Peaks determined to be noise because their intensity is smaller than the mean", NoisePeaks.class),
-    NOISEINT_PEAK     ("NOISEINTPEAK",   "Noise peaks (Spectrum divided into divisions. Noise peaks are below intensity percentile", NoisePeaksByInterval.class),
-    NONNOISE_PEAK     ("NONOISEPEAK",    "Peaks determined to be 'real' because their intensity is bigger than the mean", NonNoisePeaks.class),
-    NONNOSE3_PEAK     ("NONOISE3PEAK",   "Signal peaks (Spectrum divided into divisions. Signal peaks are above intensity percentile: ", NonNoisePeaks3.class);
+    ALL_PEAKS         ("PROALLPEAK",        "Processing including all the peaks in the analysis", AllPeaks.class),
+    DOM_PEAKS         ("PRODOMPEAK",        "Processing including Dominant peaks: bigger than 20% of the average of the 5 biggest peaks", DominantPeaks.class),
+    DOM_DA_PEAKS      ("PRODOMDAPEAK",      "Dominant peaks: bigger than 20% of the average of the 5 biggest peaks", DominantPeaksPerDalton.class),
+    ISO_PEAKS         ("PROISOPEAK",        "Processing including Isotope signal, peaks which fit a mass-dependent isotope pattern predicted by a Poisson model", IsotopePeaks.class),
+    NOISE_PEAKS       ("PRONOISEPEAK",      "Processing including Peaks determined to be noise because their intensity is smaller than the mean", NoisePeaks.class),
+    NOISEINT_PEAK     ("PRONOISEINTPEAK",   "Processing including Noise peaks (Spectrum divided into divisions. Noise peaks are below intensity percentile", NoisePeaksByInterval.class),
+    NONNOISE_PEAK     ("PRONONOISEPEAK",    "Processing including Peaks determined to be 'real' because their intensity is bigger than the mean", NonNoisePeaks.class),
+    NONNOSE3_PEAK     ("PRONONOISE3PEAK",   "Processing including Signal peaks (Spectrum divided into divisions. Signal peaks are above intensity percentile: ", NonNoisePeaks3.class);
 
     private String code;
     private String title;

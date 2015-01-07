@@ -3,12 +3,14 @@ package uk.ac.ebi.pride.utilities.quality.spectrum.features;
 import uk.ac.ebi.pride.utilities.data.core.Spectrum;
 import uk.ac.ebi.pride.utilities.quality.utils.SpectrumFeatureType;
 
+import java.text.DecimalFormat;
 import java.util.*;
 
 /**
  * Function to compute the XArea of an Spectrum following the Nu et al approach:
  * Na S, Paek E: Quality Assessment of Tandem Mass Spectra Based on Cumulative Intensity Normalization.
  * Journal of Proteome Research 2006, 5(12):3241-3248.
+ *
  * @author ypriverol
  */
 public class XXArea implements FeatureCalculator {
@@ -63,6 +65,11 @@ public class XXArea implements FeatureCalculator {
 
         //double XArea = triangleArea - cumulativeArea;
         double XArea = cumulativeArea;
+
+        DecimalFormat df = new DecimalFormat("#.##");
+
+        XArea = Double.parseDouble(df.format(XArea));
+
         features.put(SpectrumFeatureType.XXArea, XArea);
 
         return features;
