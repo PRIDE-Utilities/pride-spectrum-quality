@@ -68,7 +68,7 @@ public class AATagFinder implements FeatureCalculator{
             return features;
 
         double[][] peakList = spectrum.getMassIntensityMap();
-        double[] count = new double[peakList.length];
+        double[]   count = new double[peakList.length];
             
         ArrayList[] destinations = new ArrayList[peakList.length];
         double result1 = 0, result1_pos = 0, result1_tot = 0;
@@ -117,7 +117,6 @@ public class AATagFinder implements FeatureCalculator{
             features.put(SpectrumFeatureType.QUALSCORE_AA_MASS_ABUNDANCE_WEIGHTED,result4);
             features.put(SpectrumFeatureType.QUALSCORE_AA_MASS_TAG_AVG_LONGER, result2);
             features.put(SpectrumFeatureType.QUALSCORE_AA_MASS_TAG_LONGER, result3);
-            //return new double[] { result1, result4, result2, result3 };
             return features;
         }
 

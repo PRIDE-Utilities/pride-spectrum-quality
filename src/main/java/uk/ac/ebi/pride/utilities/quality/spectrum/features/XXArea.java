@@ -30,6 +30,9 @@ public class XXArea implements FeatureCalculator {
     @Override
     public Map<SpectrumFeatureType, Object> computeFeature(Spectrum spectrum, int charge) {
 
+        if (spectrum == null || spectrum.getMassIntensityMap().length == 0)
+            return features;
+
         double[] intensityClone = spectrum.getIntensityBinaryDataArray().getDoubleArray();
 
         Arrays.sort(intensityClone);

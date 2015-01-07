@@ -1,6 +1,7 @@
 package uk.ac.ebi.pride.utilities.quality.spectrum.peakselectors;
 
 import uk.ac.ebi.pride.utilities.data.core.Spectrum;
+import uk.ac.ebi.pride.utilities.quality.utils.ProcessingType;
 import uk.ac.ebi.pride.utilities.quality.utils.math.RobustMath;
 
 import javax.swing.text.NumberFormatter;
@@ -82,13 +83,11 @@ public class NonNoisePeaks3 implements PeakSelector{
 	}
     @Override
 	public String getDescription(){
-        NumberFormat nf = NumberFormat.getInstance();
-		return "Signal peaks (Spectrum divided into " + divisions + " divisions. Signal peaks are above intensity percentile: " +nf.format(percentileCutoff) + ")";
+        return ProcessingType.NONNOSE3_PEAK.getTitle();
 	}
 
     @Override
-	public String getLabel(){
-        NumberFormat nf = NumberFormat.getInstance();
-		return "Signal peaks (perc. " + nf.format(percentileCutoff) + ")";
+	public String getCode(){
+        return ProcessingType.NONNOSE3_PEAK.getCode();
 	}
 }

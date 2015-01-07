@@ -1,6 +1,7 @@
 package uk.ac.ebi.pride.utilities.quality.spectrum.peakselectors;
 
 import uk.ac.ebi.pride.utilities.data.core.Spectrum;
+import uk.ac.ebi.pride.utilities.quality.utils.ProcessingType;
 
 /**
  * The simplest PeakSelector: all peaks that are input are outputted
@@ -10,15 +11,17 @@ import uk.ac.ebi.pride.utilities.data.core.Spectrum;
  */
 public class AllPeaks implements PeakSelector{
 
-	public Spectrum transform(Spectrum spectrum){
+    public Spectrum transform(Spectrum spectrum){
 		return spectrum;
 	}
-	
+
+    @Override
 	public String getDescription(){
-		return "All peaks";
+		return ProcessingType.ALL_PEAKS.getTitle();
 	}
-	
-	public String getLabel(){
-		return "All peaks";
-	}
+
+    @Override
+    public String getCode() {
+        return ProcessingType.ALL_PEAKS.getCode();
+    }
 }

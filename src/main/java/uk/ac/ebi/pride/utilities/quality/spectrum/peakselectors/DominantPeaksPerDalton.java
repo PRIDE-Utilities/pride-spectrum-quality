@@ -2,6 +2,7 @@ package uk.ac.ebi.pride.utilities.quality.spectrum.peakselectors;
 
 import uk.ac.ebi.pride.utilities.data.core.Spectrum;
 import uk.ac.ebi.pride.utilities.quality.spectrum.common.SpectrumUtils;
+import uk.ac.ebi.pride.utilities.quality.utils.ProcessingType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,15 +60,15 @@ public class DominantPeaksPerDalton implements PeakSelector{
 	}
 
     @Override
-	public String getLabel()
+	public String getDescription()
 	{
-		return "Dom. Dal. peaks";
+		return ProcessingType.DOM_PEAKS.getTitle();
 	}
 
     @Override
-	public String getDescription()
-	{
-		return "Dominant peaks: bigger than 20% of the average of the 5 biggest peaks";
-	}
+    public String getCode()
+    {
+        return ProcessingType.DOM_PEAKS.getCode();
+    }
 
 }

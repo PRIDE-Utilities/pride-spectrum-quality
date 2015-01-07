@@ -19,16 +19,17 @@ public interface PeakSelector{
      */
 	public Spectrum transform(Spectrum spectrum) throws CloneNotSupportedException;
 
-	/*
-	 * Description of the method used to transform one spectrum into another spectrum representation
-	 */
-    public String getDescription();
-
-    /**
+	/**
      * Every method has they are own label to know which method was applied.
      * @return
      */
-    public String getLabel();
+    public String getDescription();
+
+    /**
+     * Get a code for a feature, like an identifier  for the feature.
+     * @return
+     */
+    public String getCode();
 
 
 }

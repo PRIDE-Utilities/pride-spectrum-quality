@@ -64,14 +64,14 @@ public class GeneralFeatures implements FeatureCalculator{
 
         double[][] peakList = spectrum.getMassIntensityMap();
 
-        int outp_peakCount = peakList.length;
+        //Peak count
+        int peakCount = peakList.length;
 
         Double[] peaks = new Double[peakList.length];
 
         // TIC total ion current
         double totalIntensity = 0;
-        for (int i = 0; i < peakList.length; i++)
-        {
+        for (int i = 0; i < peakList.length; i++){
             peaks[i] = new Double(peakList[i][1]); // save intensities
             totalIntensity += peakList[i][1];
         }
@@ -79,42 +79,45 @@ public class GeneralFeatures implements FeatureCalculator{
         // normal distribution parameters
         RobustMath.NormalDistributionParameters ndp;
         ndp = RobustMath.normalEstimate(peaks);
-        double outp_avgIntensity = ndp.mean, outp_sdIntensity = ndp.stddev, outp_skewnessIntensity = ndp.skewness;
+
+        double avgIntensity      = ndp.mean;
+        double sdIntensity       = ndp.stddev;
+        double skewnessIntensity = ndp.skewness;
 
         // signal range
-        double outp_mzRange1 = /*peakList[peakList.length - 1][0] - peakList[0][0];*/
-                getSmallestMassRangeContainingIntensity(peakList,
-                        0.95 * totalIntensity);
-        double outp_mzRange2 =
-                getSmallestMassRangeContainingIntensity(
-                        peakList,
-                        0.5 * totalIntensity);
+        double mzRange1 = getSmallestMassRangeContainingIntensity(peakList, 0.95 * totalIntensity);
+
+        double mzRange2 = getSmallestMassRangeContainingIntensity(peakList, 0.50 * totalIntensity);
 
         // peak density
-        double outp_peakPerMz, outp_TICPerMz;
-        if (outp_mzRange1 <= 0.001)
-            outp_peakPerMz = 1;
+        double peakPerMz;
+        double ticPerMz;
+
+        if (mzRange1 <= 0.001)
+            peakPerMz = 1;
         else
-            outp_peakPerMz = outp_peakCount / outp_mzRange1;
+            peakPerMz = peakCount / mzRange1;
 
         // TIC per Da
-        if (outp_mzRange1 <= 0.001)
-            outp_TICPerMz = 1;
+        if (mzRange1 <= 0.001)
+            ticPerMz = 1;
         else
-            outp_TICPerMz = totalIntensity / outp_mzRange1;
+            ticPerMz = totalIntensity / mzRange1;
 
         // analyse gap width between peaks
         peaks = new Double[peakList.length - 1];
+
         for (int i = 0; i < peakList.length - 1; i++)
             peaks[i] = new Double(peakList[i + 1][0] - peakList[i][0]);
+
         RobustMath.NormalDistributionParameters ndp2;
         ndp2 = RobustMath.normalEstimate(peaks);
 
-        double outp_sdMassGap;
+        double sdMassGap;
         if (peakList.length == 1)
-            outp_sdMassGap = 0;
+            sdMassGap = 0;
         else
-            outp_sdMassGap = ndp2.stddev;
+            sdMassGap = ndp2.stddev;
 
         double outp_avgWithin2 = 0;
 
@@ -144,13 +147,13 @@ public class GeneralFeatures implements FeatureCalculator{
 
         double precursorMZ = DataAccessUtilities.getPrecursorMz(spectrum);
 
-        features.put(SpectrumFeatureType.QUALSCORE_NUM_PEAKS, Math.sqrt(outp_peakCount));
-        features.put(SpectrumFeatureType.QUALSCORE_AVG_BY_INTENSITY,  Math.log(outp_avgIntensity + 1));
-        features.put(SpectrumFeatureType.QUALSCORE_STD_INTENSITY, Math.log(outp_sdIntensity + 1));
-        features.put(SpectrumFeatureType.QUALSCORE_MZ_95_INTENSITY, outp_mzRange1 / precursorMZ);
-        features.put(SpectrumFeatureType.QUALSCORE_MZ_50_INTENSITY, outp_mzRange2 / precursorMZ);
-        features.put(SpectrumFeatureType.QUALSCORE_TIC_MZ, Math.log(outp_TICPerMz + 1E-4));
-        features.put(SpectrumFeatureType.QUALSCORE_MASS_GAP, Math.log(outp_sdMassGap + 1E-4));
+        features.put(SpectrumFeatureType.QUALSCORE_NUM_PEAKS, Math.sqrt(peakCount));
+        features.put(SpectrumFeatureType.QUALSCORE_AVG_BY_INTENSITY,  Math.log(avgIntensity + 1));
+        features.put(SpectrumFeatureType.QUALSCORE_STD_INTENSITY, Math.log(sdIntensity + 1));
+        features.put(SpectrumFeatureType.QUALSCORE_MZ_95_INTENSITY, mzRange1 / precursorMZ);
+        features.put(SpectrumFeatureType.QUALSCORE_MZ_50_INTENSITY, mzRange2 / precursorMZ);
+        features.put(SpectrumFeatureType.QUALSCORE_TIC_MZ, Math.log(ticPerMz + 1E-4));
+        features.put(SpectrumFeatureType.QUALSCORE_MASS_GAP, Math.log(sdMassGap + 1E-4));
         features.put(SpectrumFeatureType.QUALSCORE_NEIGHGOR_2DA, outp_avgWithin2);
 
         return features;

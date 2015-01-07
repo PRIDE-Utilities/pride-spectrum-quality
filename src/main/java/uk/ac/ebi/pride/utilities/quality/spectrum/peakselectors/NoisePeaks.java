@@ -2,6 +2,7 @@ package uk.ac.ebi.pride.utilities.quality.spectrum.peakselectors;
 
 import uk.ac.ebi.pride.utilities.data.core.Spectrum;
 import uk.ac.ebi.pride.utilities.quality.spectrum.common.SpectrumUtils;
+import uk.ac.ebi.pride.utilities.quality.utils.ProcessingType;
 import uk.ac.ebi.pride.utilities.quality.utils.math.RobustMath;
 
 import java.util.ArrayList;
@@ -65,10 +66,10 @@ public class NoisePeaks implements PeakSelector{
 
     @Override
 	public String getDescription(){
-		return "Peaks determined to be noise because their intensity is smaller than the mean + " + zLimit;
+		return ProcessingType.NOISE_PEAKS.getTitle();
 	}
 
-	public String getLabel(){
-		return "Noise";
+	public String getCode(){
+		return ProcessingType.NOISE_PEAKS.getCode();
 	}
 }

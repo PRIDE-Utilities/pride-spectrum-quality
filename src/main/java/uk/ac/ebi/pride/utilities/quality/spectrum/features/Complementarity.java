@@ -68,6 +68,7 @@ public class Complementarity implements FeatureCalculator{
         score5 = Math.sqrt(comparePeaks(peakList, 0.5, parentmass - 17) / (comparePeaks(peakList, 0.5, parentmass - 10) + 1)); // ammonia
         score6 = Math.sqrt(comparePeaks(peakList, 0.5, parentmass - 18) / (comparePeaks(peakList, 0.5, parentmass - 10) + 1)); // water
         score7 = Math.sqrt(comparePeaks(peakList, 0.5, parentmass - 28) / (comparePeaks(peakList, 0.5, parentmass - 10) + 1)); // carbon monoxide
+
         Map<SpectrumFeatureType, Object> features = new HashMap<SpectrumFeatureType, Object>();
         features.put(SpectrumFeatureType.QUALSCORE_Complement_B_Y_IONS_3vs3, score1);
         features.put(SpectrumFeatureType.QUALSCORE_Complement_B_Y_IONS_1vs3, score2);

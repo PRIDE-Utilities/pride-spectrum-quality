@@ -6,6 +6,7 @@ package uk.ac.ebi.pride.utilities.quality.spectrum.peakselectors;
 
 import uk.ac.ebi.pride.utilities.data.core.Spectrum;
 import uk.ac.ebi.pride.utilities.quality.spectrum.common.SpectrumUtils;
+import uk.ac.ebi.pride.utilities.quality.utils.ProcessingType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,11 +67,11 @@ public class DominantPeaks implements PeakSelector{
 
     @Override
 	public String getDescription(){
-		return "Dominant peaks: bigger than 20% of the average of the 5 biggest peaks";
+		return ProcessingType.DOM_PEAKS.getTitle();
 	}
 
     @Override
-    public String getLabel() {
-        return "Dom. peaks";
+    public String getCode() {
+        return ProcessingType.DOM_PEAKS.getCode();
     }
 }

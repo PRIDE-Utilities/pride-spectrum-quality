@@ -54,6 +54,7 @@ public class SpectrumFeatureGenerator{
 
     private Map<Integer, Map<SpectrumFeatureType, Object>> features;
 
+
     /**
      * Protected constructor for singleton pattern without parameters. In the constructor we create the parameters to compute
      * all the features in the main feature object.
@@ -114,6 +115,7 @@ public class SpectrumFeatureGenerator{
         for (int i = 0; i < firstSelector.length; i++) {
             analysedSpectrum = firstSelector[i].transform(spectrum);
             Map<SpectrumFeatureType, Object> values = generalFeatures.computeFeature(analysedSpectrum, charge);
+            values.putAll(XXArea.getInstance().computeFeature(analysedSpectrum,charge));
             features.put(features.size() + 1, values);
         }
         
@@ -134,6 +136,6 @@ public class SpectrumFeatureGenerator{
 
         return features;
     }
-    
+
 }
 

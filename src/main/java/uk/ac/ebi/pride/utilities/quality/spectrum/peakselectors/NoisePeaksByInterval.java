@@ -2,6 +2,7 @@
 package uk.ac.ebi.pride.utilities.quality.spectrum.peakselectors;
 
 import uk.ac.ebi.pride.utilities.data.core.Spectrum;
+import uk.ac.ebi.pride.utilities.quality.utils.ProcessingType;
 import uk.ac.ebi.pride.utilities.quality.utils.math.RobustMath;
 
 import java.util.ArrayList;
@@ -83,12 +84,12 @@ public class NoisePeaksByInterval implements PeakSelector{
 
     @Override
 	public String getDescription(){
-		return "Noise peaks (Spectrum divided into " + divisions + " divisions. Noise peaks are below intensity percentile: " + percentileCutoff + ")";
+		return ProcessingType.NOISEINT_PEAK.getTitle();
 	}
 
     @Override
-	public String getLabel()
+	public String getCode()
 	{
-		return "Noise peaks (perc. " + percentileCutoff + ")";
+		return ProcessingType.NOISEINT_PEAK.getCode();
 	}
 }

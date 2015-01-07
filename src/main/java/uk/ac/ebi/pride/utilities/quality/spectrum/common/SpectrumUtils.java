@@ -5,11 +5,9 @@ import uk.ac.ebi.pride.utilities.data.core.Spectrum;
 import java.util.*;
 
 /**
-
+ * Spectrum Utilities  contains a set of functions to sort peaks by Mass, by Peak intensity
+ * Also it contains functions to select peaks, etc.
  * @author ypriverol
- * Date: 5/26/13
- * Time: 9:09 AM
- * To change this template use File | Settings | File Templates.
  */
 public class SpectrumUtils {
 

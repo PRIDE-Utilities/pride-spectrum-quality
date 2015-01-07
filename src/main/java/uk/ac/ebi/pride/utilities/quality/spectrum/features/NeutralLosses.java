@@ -30,7 +30,6 @@ public class NeutralLosses implements FeatureCalculator{
         features.put(SpectrumFeatureType.QUALSCORE_AMONIA_28_SC,    0);
         features.put(SpectrumFeatureType.QUALSCORE_AMONIA_28_AVGB,  0);
         features.put(SpectrumFeatureType.QUALSCORE_AMONIA_28_AVGMB, 0);
-
     }
 
     public static NeutralLosses getInstance(){
@@ -52,8 +51,6 @@ public class NeutralLosses implements FeatureCalculator{
             return features;
 
         double[][] peakList = spectrum.getMassIntensityMap();
-
-        double[] scores = new double[9];
 
         int repeats = 8;
         double sum = 0, avg = 0;

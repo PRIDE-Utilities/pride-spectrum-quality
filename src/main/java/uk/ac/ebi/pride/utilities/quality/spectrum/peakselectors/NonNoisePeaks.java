@@ -1,6 +1,7 @@
 package uk.ac.ebi.pride.utilities.quality.spectrum.peakselectors;
 
 import uk.ac.ebi.pride.utilities.data.core.Spectrum;
+import uk.ac.ebi.pride.utilities.quality.utils.ProcessingType;
 import uk.ac.ebi.pride.utilities.quality.utils.math.RobustMath;
 
 import java.text.NumberFormat;
@@ -58,12 +59,11 @@ public class NonNoisePeaks implements PeakSelector{
 
     @Override
 	public String getDescription(){
-        NumberFormat nf = NumberFormat.getInstance();
-		return "Peaks determined to be 'real' because their intensity is bigger than the mean + " + nf.format(zLimit) + " SD";
+       return ProcessingType.NONNOISE_PEAK.getTitle();
 	}
 
     @Override
-	public String getLabel(){
-		return "Sig. peaks";
+	public String getCode(){
+		return ProcessingType.NONNOSE3_PEAK.getCode();
 	}
 }

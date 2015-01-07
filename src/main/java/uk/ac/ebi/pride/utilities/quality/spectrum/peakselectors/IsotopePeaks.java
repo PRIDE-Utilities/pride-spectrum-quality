@@ -1,6 +1,7 @@
 package uk.ac.ebi.pride.utilities.quality.spectrum.peakselectors;
 
 import uk.ac.ebi.pride.utilities.data.core.Spectrum;
+import uk.ac.ebi.pride.utilities.quality.utils.ProcessingType;
 
 import java.util.ArrayList;
 
@@ -99,18 +100,12 @@ public class IsotopePeaks implements PeakSelector{
     
     @Override
     public String getDescription(){
-        String returnstring = "";
-        if(signal == true) returnstring = "Isotope signal, peaks which fit a mass-dependent isotope pattern predicted by a Poisson model";
-        if(signal == false) returnstring = "Isotope noise, peaks which fit a mass-dependent isotope pattern predicted by a Poisson model";
-        return returnstring;
+        return ProcessingType.ISO_PEAKS.getTitle();
     }
 
     @Override
-    public String getLabel() {
-        String returnstring = "";
-        if(signal == true) returnstring = "Isotope signal (cutoff " + similarityScoreCutoff + ")";
-        if(signal == false) returnstring = "Isotope noise, (cutoff: " + similarityScoreCutoff + ")";
-        return returnstring;
+    public String getCode() {
+        return ProcessingType.ISO_PEAKS.getCode();
     }
     
   /*
